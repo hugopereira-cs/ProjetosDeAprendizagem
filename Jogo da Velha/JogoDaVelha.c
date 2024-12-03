@@ -44,7 +44,7 @@ int main(){
             }while (R == 1);
             MudaJogador(simb);
 
-        }while (TerminouVelha(mat[3][3], l, c, totX, totO, emp) == 1);
+        }while (TerminouVelha(mat[3][3], terminou, l, c, totX, totO, oc, emp) == 1);
            
     } while (totX + totO + emp < 7);
     
@@ -104,21 +104,57 @@ void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou){
         simb = 'O';
     }else
         simb = 'X';    
- }
+}
 
  int TerminouVelha(int mat[3][3], int terminou, int l, int c, int totX, int totO, int oc, int emp){
     terminou = 0;
     // jogos em linha
     for( l=0; l<3; l++ ){
-        if( mat[l][1] == mat[l][2] && mat[l][2] == mat[l][3] && mat[l][1] == 'X'){
+        if( mat[l][1] == mat[l][2] && mat[l][2] == mat[l][3] && mat[l][1] == 'X' ){
             totX += 1;
             terminou = 1;
         }
-        if
+        if( mat[l][1] == mat[l][2] && mat[l][2] == mat[l][3] && mat[l][1] == 'O' ){
+            totO += 1;
+            terminou = 1;
+        }
     }
-    
-
- }
+    // jogos em coluna
+    for( c=0; c<3; c++ ){
+        if( mat[1][c] == mat[2][c] && mat[2][c] == mat[3][c] && mat[1][c] == 'X' ){
+            totX += 1;
+            terminou = 1;
+        }
+        if( mat[1][c] == mat[2][c] && mat[2][c] == mat[3][c] && mat[1][c] == 'O' ){
+            totO += 1;
+            terminou = 1;
+        }
+    }
+    // jogos em diagonal
+    if( mat[1][1] == mat[2][2] && mat[2][2] == mat[3][3] && mat[1][1] == 'X' ){
+        totX += 1;
+        terminou = 1;
+    }
+    if( mat[1][1] == mat[2][2] && mat[2][2] == mat[3][3] && mat[1][1] == 'O' ){
+        totO += 1;
+        terminou = 1;
+    }
+    if( mat[1][3] == mat[2][2] && mat [2][2] == mat[3][1] && mat[1][3] == 'X' ){
+        totX += 1;
+        terminou = 1;
+    }
+    if( mat[1][3] == mat[2][2] && mat [2][2] == mat[3][1] && mat[1][3] == 'O' ){
+        totO += 1;
+        terminou = 1;
+    }
+    // velha
+    oc = 0;
+    for( l=0; l<3; l++){
+        for( c=0; c<3; c++){
+            if( mat[l][c] <> 'X')
+        }
+    }
+}   
 
 
 
