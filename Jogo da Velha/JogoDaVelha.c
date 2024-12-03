@@ -8,7 +8,7 @@
 void MostraPlacar(char p1[N], char p2[N], int e, int tX, int tO);
 void NovoJogo(int mat[3][3], int l, int c, int cont);
 void MostraVelha(int mat[3][3], int l, int c, int cont);
-void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou);
+int Jogar(char s, int mat[3][3], int l, int c, int p, int mudou);
 void MudaJogador(char simb);
 int TerminouVelha(int mat[3][3], int terminou, int l, int c, int totX, int totO, int oc, int emp);
 
@@ -16,7 +16,8 @@ int main(){
     setlocale(LC_ALL,"Portuguese");
 
     char mat[3][3],jog1[N], jog2[N], simb='X';
-    int l, c, pos, cont=1, totX=0, totO=0, emp=0, i1, i2, R;
+    int l, c, pos, cont=1, totX=0, totO=0, emp=0, i1, i2, R, mud, term, ocor;
+    
     
 
     printf("Quem vai jogar com X?\n");
@@ -37,14 +38,14 @@ int main(){
             {
                 printf("Vai jogar [%c:1", simb, "] em que posição?");
                 scanf("%d", pos);
-                R = JOga(simb, pos);
+                R = Jogar(simb, mat[3][3], l, c, pos, mud);
                 if( R == 0){
                     printf("JOGADA INVÁLIDA");
                 }
             }while (R == 1);
             MudaJogador(simb);
 
-        }while (TerminouVelha(mat[3][3], terminou, l, c, totX, totO, oc, emp) == 1);
+        }while (TerminouVelha(mat[3][3], term, l, c, totX, totO, ocor, emp) == 1);
            
     } while (totX + totO + emp < 7);
     
@@ -86,7 +87,7 @@ void MostraVelha(int mat[3][3], int l, int c, int cont){
     }
 }
 
-void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou){
+int Jogar(char s, int mat[3][3], int l, int c, int p, int mudou){
     mudou = 0;
     for( l=0; l<3; l++){
         for( c=0; c<3; c++){
