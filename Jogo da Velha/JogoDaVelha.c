@@ -151,9 +151,16 @@ void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou){
     oc = 0;
     for( l=0; l<3; l++){
         for( c=0; c<3; c++){
-            if( mat[l][c] <> 'X')
+            if( mat[l][c] != 'X' && mat[l][c] != 'O' ){
+                oc += 1;
+            }
         }
     }
+    if( oc == 0 ){
+        emp += 1;
+        terminou = 1;
+    }
+    return terminou;
 }   
 
 
