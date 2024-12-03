@@ -6,14 +6,18 @@
 #define N 50
 
 void MostraPlacar(char p1[N], char p2[N], int e, int tX, int tO);
-void NovoJogo(char mat[3][3], int l, int c, int cont);
-void MostraVelha(char mat[3][3], int l, int c, int cont);
+void NovoJogo(int mat[3][3], int l, int c, int cont);
+void MostraVelha(int mat[3][3], int l, int c, int cont);
+void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou);
+void MudaJogador(char simb);
+int TerminouVelha(int mat[3][3], int terminou, int l, int c, int totX, int totO, int oc, int emp);
 
 int main(){
     setlocale(LC_ALL,"Portuguese");
 
     char mat[3][3],jog1[N], jog2[N], simb='X';
-    int l, c, pos, cont=1, totX=0, totO=0, emp=0, i1, i2; 
+    int l, c, pos, cont=1, totX=0, totO=0, emp=0, i1, i2, R;
+    
 
     printf("Quem vai jogar com X?\n");
     gets(jog1);
@@ -28,6 +32,19 @@ int main(){
         MostraPlacar(jog1[N], jog2[N], emp, totX, totO);
         NovoJogo(mat[3][3], l, c, cont);
         MostraVelha(mat[3][3],l, c, cont); 
+        do{
+            do
+            {
+                printf("Vai jogar [%c:1", simb, "] em que posição?");
+                scanf("%d", pos);
+                R = JOga(simb, pos);
+                if( R == 0){
+                    printf("JOGADA INVÁLIDA");
+                }
+            }while (R == 1);
+            MudaJogador(simb);
+
+        }while (TerminouVelha(mat[3][3], l, c, totX, totO, emp) == 1);
            
     } while (totX + totO + emp < 7);
     
@@ -44,7 +61,7 @@ void MostraPlacar(char p1[N], char p2[N], int e, int tX, int tO){
     return (p1, p2, e, tX, tO);
 }
 
-void NovoJogo(char mat[3][3], int l, int c, int cont){
+void NovoJogo(int mat[3][3], int l, int c, int cont){
     cont=1;
     for( l=0; l<3; l++){
         for( c=0; c<3; c++){
@@ -58,9 +75,9 @@ char NumpCarac(int num){
     return 0 + num;
 }
 
-void MostraVelha(char mat[3][3], int l, int c, int cont){
+void MostraVelha(int mat[3][3], int l, int c, int cont){
     printf("+---+---+---+\n");
-    for(l=0; l<3; l++){
+    for( l=0; l<3; l++){
         for(c=0; c<3; c++){
             printf("|  .1", mat[l,c]);
         }
@@ -68,6 +85,41 @@ void MostraVelha(char mat[3][3], int l, int c, int cont){
         printf("+---+---+---+\n");
     }
 }
+
+void Jogar(char s, int mat[3][3], int l, int c, int p, int mudou){
+    mudou = 0;
+    for( l=0; l<3; l++){
+        for( c=0; c<3; c++){
+            if( mat[l][c] == NumpCarac(p)){
+                mat[l][c] = s;
+                mudou = 1;
+            }
+        }
+    }
+    return mudou;
+}
+
+ void MudaJogador(char simb){
+    if( simb == 'X'){
+        simb = 'O';
+    }else
+        simb = 'X';    
+ }
+
+ int TerminouVelha(int mat[3][3], int terminou, int l, int c, int totX, int totO, int oc, int emp){
+    terminou = 0;
+    // jogos em linha
+    for( l=0; l<3; l++ ){
+        if( mat[l][1] == mat[l][2] && mat[l][2] == mat[l][3] && mat[l][1] == 'X'){
+            totX += 1;
+            terminou = 1;
+        }
+        if
+    }
+    
+
+ }
+
 
 
 
