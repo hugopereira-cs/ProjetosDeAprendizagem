@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <locale.h>
 
 
 //variáveis globais
 
-char game[3][3]; //matriz (tabuleiro)
+static char game[3][3], player1_name[8] = {0}, player2_name[8] = {0};
 
-int column, row;
+int player1_score = 0, player2_score = 0, draw = 0, column, row;
 
 //funções e procedimentos
 
@@ -34,13 +36,39 @@ int empty_posit();
 
 void play();
 
+void show_score(char*, char*, int, int , int);
+
 
 int main ()
 {
+    setlocale(LC_ALL, "Portuguese");
+
     int option;
+
+    printf("digite o nome do jogador 1 : ");
+
+    fgets(player1_name, sizeof(player1_name), stdin);
+
+    player1_name[strcspn(player1_name, "\n")] = 0;
+
+    fflush(stdin);
+
+    printf("digite o nome do jogador 2 : ");
+
+    fgets(player2_name, sizeof(player2_name), stdin);
+
+    player2_name[strcspn(player2_name, "\n")] = 0;
+
+    fflush(stdin);
+
+    printf("%s jogará com [X]\n", player1_name);
+
+    printf("%s jogará com [O]\n\n", player2_name);
 
     do
     {
+        show_score(player1_name, player2_name, player1_score, player2_score, draw);
+        
         init();
 
         play();
@@ -131,7 +159,7 @@ int win_rows(char c)
 
     for (row = 0; row < 3; row ++)
     {
-       win += win_row(row, c); 
+        win += win_row(row, c); 
     }
     return win;
 }
@@ -188,7 +216,7 @@ int win_principal_diag(char c)
 
 int win_secondary_diag(char c)
 {
-    if (game[0][2] == c && game[1][1] == c && game[2][0])
+    if (game[0][2] == c && game[1][1] == c && game[2][0] == c)
         return 1;
     else
         return 0;
@@ -300,14 +328,38 @@ void play()
     show_game();
 
     if(O_Win == 1)
+    {
+
+        player2_score += 1;
 
         printf("\nParabéns Jogador 2. Você venceu!!!\n");
 
-    else if(X_win == 1)
+    }else if(X_win == 1)
+    {
+        player1_score += 1;
 
         printf("\nParabéns Jogador 1. Você venceu!!!\n");  
-
+    }
     else
-    
+    {
+        draw += 1;
+        
         printf("\nDeu velha!!!\n");
+    }
+}
+
+//procedimento para exibir placar do jogo
+
+void show_score(char* player1_name, char* player2_name, int player1_score, int player2_score, int draw)
+{
+    printf("---------------\n");
+    
+    printf("%s - %d\n", player1_name, player1_score);
+
+    printf("%s - %d\n", player2_name, player2_score);
+
+    printf("Velha - %d\n", draw);
+
+    printf("---------------\n\n");
+
 }
