@@ -38,6 +38,8 @@ void play();
 
 void show_score(char*, char*, int, int , int);
 
+void clean_the_screen();
+
 
 int main ()
 {
@@ -45,7 +47,7 @@ int main ()
 
     int option;
 
-    printf("digite o nome do jogador 1 : ");
+    printf("Você jogará com [X], qual o seu nome? ");
 
     fgets(player1_name, sizeof(player1_name), stdin);
 
@@ -53,7 +55,7 @@ int main ()
 
     fflush(stdin);
 
-    printf("digite o nome do jogador 2 : ");
+    printf("Você jogará com [O], qual o seu nome? ");
 
     fgets(player2_name, sizeof(player2_name), stdin);
 
@@ -61,12 +63,11 @@ int main ()
 
     fflush(stdin);
 
-    printf("%s jogará com [X]\n", player1_name);
-
-    printf("%s jogará com [O]\n\n", player2_name);
 
     do
     {
+        clean_the_screen();
+        
         show_score(player1_name, player2_name, player1_score, player2_score, draw);
         
         init();
@@ -260,6 +261,10 @@ void read_coordinates(char p)
 
         fflush(stdin);
     }
+    clean_the_screen();
+
+    show_score(player1_name, player2_name, player1_score, player2_score, draw);
+    
     game[r][col] = p;
 
 }
@@ -361,5 +366,21 @@ void show_score(char* player1_name, char* player2_name, int player1_score, int p
     printf("Velha - %d\n", draw);
 
     printf("---------------\n\n");
+
+}
+
+//procedimento para limpar a tela
+
+void clean_the_screen()
+{
+    #ifdef _WIN32
+
+        system("cls");
+
+    #else
+
+        system("clear");
+
+    #endif
 
 }
