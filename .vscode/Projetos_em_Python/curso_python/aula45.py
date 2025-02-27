@@ -35,5 +35,5 @@ em seguida solicita, para o iterável, o objeto iterador dele;a seguir, ele soli
 acionado(quando o limite de valores for excedido), iss irá sinalizar para o for que ele deve interromper a iteração.
 """
 
-for letra in texto:
+for letra in texto: # O código acima representa o funcionamento deste for por trás dos panos.
     print(letra)
