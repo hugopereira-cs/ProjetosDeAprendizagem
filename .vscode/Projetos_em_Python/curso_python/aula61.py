@@ -24,7 +24,7 @@ Caso contrário:
 O primeiro dígito do CPF é 7
 """
 
-cpf = '30331636026'
+cpf = '92766893032'
 nove_digitos = cpf[:9]
 contador_regressivo_1 = 10
 resultado_digito_1 = 0
