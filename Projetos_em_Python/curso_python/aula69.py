@@ -11,7 +11,6 @@ A palvra global faz uma variável do escopo externo ser a mesma no escopo intern
 x = 1 # Valor global de x
 
 def escopo(): # Definindo função escopo
-    # global x
     x = 10
 
     def outra_funcao():
