@@ -34,22 +34,43 @@
 
 # Métodos úteis:
 # add (adiciona um valor de cada vez)
-s1 = set()
-s1.add("Hugo")
-s1.add(1)
+# s1 = set()
+# s1.add("Hugo")
+# s1.add(1)
 
 # update (pode adicionar vários valores por vez)
-s1.update(("Olá mundo",1, 2, 3 , 4)) # Mandando os valores dentro de uma tupla, evita-se que a str fique fora de ordem
+# s1.update(("Olá mundo",1, 2, 3 , 4)) # Mandando os valores dentro de uma tupla, evita-se que a str fique fora de ordem
 # clear (limpa o set)
 # s1.clear()
 
 # discard (descarta o valor passado para o método)
-s1.discard("Olá mundo")
+# s1.discard("Olá mundo")
 
 
-print(s1)
+# print(s1)
 # Operadores úteis:
 # união | união (union) - Une
+s1 = {1, 2, 3}
+s2 = {2, 3, 4}
+s3 = s1 | s2
+
+print(s3)
+
 # intersecção & (intersection) - Itens presentes em ambos
+s4 = s1 & s2
+
+print(s4)
+
 # diferença - Itens presentes apenas no set da esquerda
+s5 = s1 - s2
+
+print(s5)
+
+s6 = s2 - s1
+
+print(s6)
+
 # diferença simétrica ^ - Itens que não estão em ambos
+s7 = s1 ^ s2
+
+print(s7)
