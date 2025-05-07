@@ -16,4 +16,19 @@ for numero in range(10):
 
 # Um exemplo do que podemos fazer com list comprehension:
 lista = [numero * 2 for numero in range(10)] # Dupplica cada número de 0 a 10 e salva cada resultado na lista
-print(lista)
+# print(lista)
+
+# Mapeamento de dados em list comprehension - Transforma/modifica itens de uma lista para uma outra lista, que terá o mesmo tamanho da lista anterior.
+produtos = [
+    {"nome": "p1", "preco": 20, },
+    {"nome": "p2", "preco": 10, },
+    {"nome": "p3", "preco": 30, },
+]
+# Cria um novo dicionário para alterar em 5% os preço dos produtos que custam mais do que 20 reais
+novos_produtos = [
+    {**produto, "preco": produto["preco"] * 1.05} # Desempacota o dict antigo para o novo e aumenta os preços em 5%...
+    if produto["preco"] > 20 else {**produto} # somente se o produto custar mais de 20 reais, caso contrário, desempacota o dict antigo, mantendo o preço antigo
+    for produto in produtos
+    ]
+
+print(*novos_produtos, sep="\n")
